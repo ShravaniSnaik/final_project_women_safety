@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/child/child_login_screen.dart';
-import 'package:flutter_demo/model/user_model.dart';
+import 'package:flutter_application_2/child/child_login_screen.dart';
+import 'package:flutter_application_2/model/user_model.dart';
+
+
 import '../../utils/constants.dart';
 import '../components/SecondaryButton.dart';
 import '../components/PrimaryButton.dart';

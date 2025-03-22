@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/child/child_login_screen.dart';
 // import 'package:flutter_demo/child/child_login_screen.dart';
 import 'package:lottie/lottie.dart';
 
@@ -158,7 +159,7 @@ class _WelcomeScreen extends State<WelcomeScreen> {
             );
           } else {
             Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => Container()));// ✅ Navigate to Login
+        context, MaterialPageRoute(builder: (context) => LoginScreen()));// ✅ Navigate to Login
           }      } ,
       elevation: 0,
       backgroundColor: Color(0xFFECE1EE),

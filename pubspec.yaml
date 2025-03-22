@@ -22,10 +22,11 @@ dependencies:
   firebase_storage: ^12.4.4
   firebase_messaging: ^15.2.4
   shared_preferences: ^2.5.2
+  url_launcher: ^6.3.1
 
-
+  cached_network_image: ^3.4.1
   image_picker: ^1.1.2
-
+  uuid: ^4.5.1
   flutter_native_splash: ^2.4.5
   lottie: ^3.3.1
   animated_splash_screen: ^1.3.0
@@ -47,7 +48,7 @@ flutter:
     - assets/
     - assets/animations/
     - assets/logo.png
-    - assets/login_page_background.jpg
+    - assets/login_page_background (2).jpg
     - assets/animations/location.json
     - assets/animations/oportunity.json
   

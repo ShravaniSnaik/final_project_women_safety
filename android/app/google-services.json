@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1062374052181",
+    "project_id": "women-safety-app-680e9",
+    "storage_bucket": "women-safety-app-680e9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1062374052181:android:5ab0ceb9fd68cf5a8c1fdc",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAl8HUVEiZC4r_aet9vyyQFJYX-jfbkZBA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1062374052181:android:b49c96b9370ddce38c1fdc",
+        "android_client_info": {
+          "package_name": "com.example.flutter_demo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAl8HUVEiZC4r_aet9vyyQFJYX-jfbkZBA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

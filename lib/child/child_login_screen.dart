@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/child/bottom_page.dart';
-import 'package:flutter_demo/child/register_child.dart';
-import 'package:flutter_demo/db/sp.dart';
-import 'package:flutter_demo/parent/parent_home_screen.dart';
+import 'package:flutter_application_2/child/register_child.dart';
+import 'package:flutter_application_2/db/sp.dart';
+import 'package:flutter_application_2/parent/parent_home_screen.dart';
 import '../components/custom_textfield.dart';
 import '../components/PrimaryButton.dart';
 import '../../utils/constants.dart';
@@ -53,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
         String userType = userDoc['type'];
         await MySharedPreference.saveUserType(userType);
 
-        Widget nextScreen = (userType == 'parent') ? ParentHomeScreen() : BottomPage();
+        Widget nextScreen = (userType == 'parent') ? ParentHomeScreen() : Container();
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => nextScreen));
       }
     } on FirebaseAuthException catch (e) {

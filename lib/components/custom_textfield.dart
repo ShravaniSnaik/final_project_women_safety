@@ -38,11 +38,11 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       style: style ?? TextStyle(color: Colors.black),
       enabled: enable == true ? true : enable,
-      maxLines: maxLines == null ? 1 : maxLines,
+      maxLines: maxLines ?? 1,
       onSaved: onsave,
       focusNode: focusNode,
       textInputAction: textInputAction,
-      keyboardType: keyboardtype == null ? TextInputType.name : keyboardtype,
+      keyboardType: keyboardtype ?? TextInputType.name,
       controller: controller,
       validator: validate,
       obscureText: isPassword == false ? false : isPassword,
