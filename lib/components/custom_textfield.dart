@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatelessWidget {
   final String? hintText;
   final TextStyle? style;
-   final TextStyle? hintStyle; 
+  final TextStyle? hintStyle;
   final TextEditingController? controller;
   final String? Function(String?)? validate;
   final Function(String?)? onsave;
@@ -30,7 +30,9 @@ class CustomTextField extends StatelessWidget {
     this.prefix,
     this.suffix,
     this.textInputAction,
-    this.validate, this.hintStyle, this.style,
+    this.validate,
+    this.hintStyle,
+    this.style,
   });
 
   @override
@@ -38,11 +40,11 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       style: style ?? TextStyle(color: Colors.black),
       enabled: enable == true ? true : enable,
-      maxLines: maxLines == null ? 1 : maxLines,
+      maxLines: maxLines ?? 1,
       onSaved: onsave,
       focusNode: focusNode,
       textInputAction: textInputAction,
-      keyboardType: keyboardtype == null ? TextInputType.name : keyboardtype,
+      keyboardType: keyboardtype ?? TextInputType.name,
       controller: controller,
       validator: validate,
       obscureText: isPassword == false ? false : isPassword,
@@ -51,8 +53,10 @@ class CustomTextField extends StatelessWidget {
         suffixIcon: suffix,
         labelText: hintText ?? "hint text..",
         labelStyle: hintStyle, // Apply custom hint text style
-  hintText: hintText, // Ensure hint text is set
-  hintStyle: hintStyle ?? TextStyle(color:  Color(0xFFE0435E),), // Set hint text color
+        hintText: hintText, // Ensure hint text is set
+        hintStyle:
+            hintStyle ??
+            TextStyle(color: Color(0xFFE0435E)), // Set hint text color
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
           borderSide: BorderSide(

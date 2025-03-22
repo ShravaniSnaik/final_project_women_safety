@@ -4,10 +4,10 @@ class SecondaryButton extends StatelessWidget {
   final String title;
   final Function onPressed;
   const SecondaryButton({
-    Key? key,
+    super.key,
     required this.title,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,10 @@ class SecondaryButton extends StatelessWidget {
         onPressed: () {
           onPressed();
         },
-        child: Text(title, style: TextStyle(fontSize: 18,color: Color(0xFFECE1EE))),
+        child: Text(
+          title,
+          style: TextStyle(fontSize: 18, color: Color(0xFFECE1EE)),
+        ),
       ),
     );
   }

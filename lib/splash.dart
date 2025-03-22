@@ -14,7 +14,6 @@
 
 // class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin{
 
-
 //   void _navigateToNextScreen() async {
 //     await Future.delayed(const Duration(seconds: 3)); // Splash delay
 
@@ -49,7 +48,6 @@
 //   }
 // }
 
-import 'dart:async';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/WelcomePage.dart';
@@ -97,13 +95,15 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
-      backgroundColor:  Color(0xFFECE1EE),
+      backgroundColor: Color(0xFFECE1EE),
       splash: Center(
-        child: Lottie.asset('assets/animations/splash_animation.json', width: 400,  // Adjust size as needed
-      height: 400,
-      alignment: Alignment.center,
-      fit: BoxFit.cover,),
-       
+        child: Lottie.asset(
+          'assets/animations/splash_animation.json',
+          width: 400, // Adjust size as needed
+          height: 400,
+          alignment: Alignment.center,
+          fit: BoxFit.cover,
+        ),
       ),
       nextScreen: WelcomeScreen(), // Temporary screen
       duration: 3500,
