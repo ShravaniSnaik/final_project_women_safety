@@ -11,6 +11,8 @@ import '../components/PrimaryButton.dart';
 import '../components/custom_textfield.dart';
 
 class RegisterChildScreen extends StatefulWidget {
+  const RegisterChildScreen({super.key});
+
   @override
   State<RegisterChildScreen> createState() => _RegisterChildScreenState();
 }
@@ -20,7 +22,7 @@ class _RegisterChildScreenState extends State<RegisterChildScreen> {
   bool isRetypePasswordShown = true;
 
   final _formKey = GlobalKey<FormState>();
-  final _formData = Map<String, Object>();
+  final _formData = <String, Object>{};
   bool isLoading=false;
 
 
@@ -102,7 +104,7 @@ class _RegisterChildScreenState extends State<RegisterChildScreen> {
            SingleChildScrollView(
             child: Column(
               children: [
-                Container(
+                SizedBox(
                   height: MediaQuery.of(context).size.height * 0.2,
 
                   child: Column(
@@ -124,7 +126,7 @@ class _RegisterChildScreenState extends State<RegisterChildScreen> {
                   ),
                 ),
               
-                Container(
+                SizedBox(
                   height: MediaQuery.of(context).size.height * 0.75,
                   child: Form(
                     key: _formKey,

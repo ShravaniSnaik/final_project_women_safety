@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/splash.dart';
+import 'child/bottom_page.dart';
 import 'firebase_options.dart'; // ✅ Import the correct Firebase options file
 
 final navigatorKey = GlobalKey<NavigatorState>();

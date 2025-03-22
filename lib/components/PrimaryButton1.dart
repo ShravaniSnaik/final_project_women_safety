@@ -27,7 +27,11 @@ class PrimaryButton1 extends StatelessWidget {
         ),
         child: Text(
           title,
-          style: TextStyle(fontSize: 18, color: Color(0xFF43061E),fontWeight: FontWeight.w600),
+          style: TextStyle(
+            fontSize: 18,
+            color: Color(0xFF43061E),
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
     );

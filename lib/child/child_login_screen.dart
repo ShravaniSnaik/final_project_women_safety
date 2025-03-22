@@ -11,6 +11,8 @@ import '../components/SecondaryButton.dart';
 import '../parent/parent_register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -20,7 +22,43 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final Map<String, String> _formData = {};
   bool isLoading = false;
+Future<void> _resetPassword() async {
+  TextEditingController emailController = TextEditingController();
 
+  await showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: Text("Reset Password"),
+      content: TextField(
+        controller: emailController,
+        keyboardType: TextInputType.emailAddress,
+        decoration: InputDecoration(hintText: "Enter your email"),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text("Cancel"),
+        ),
+        TextButton(
+          onPressed: () async {
+            if (emailController.text.isNotEmpty && emailController.text.contains("@")) {
+              try {
+                await FirebaseAuth.instance.sendPasswordResetEmail(email: emailController.text);
+                Navigator.pop(context); // Close the dialog
+                dialogueBox(context, "Password reset email sent. Check your inbox.");
+              } catch (e) {
+                dialogueBox(context, "Error: ${e.toString()}");
+              }
+            } else {
+              dialogueBox(context, "Please enter a valid email.");
+            }
+          },
+          child: Text("Send"),
+        ),
+      ],
+    ),
+  );
+}
   Future<void> _onSubmit() async {
     if (!_formKey.currentState!.validate()) return;
     _formKey.currentState!.save();
@@ -93,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     SingleChildScrollView(
                       child: Column(
                         children: [
-                          Container(
+                          SizedBox(
                             height: MediaQuery.of(context).size.height * 0.3,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -111,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ],
                             ),
                           ),
-                          Container(
+                          SizedBox(
                             height: MediaQuery.of(context).size.height * 0.4,
                             child: Form(
                               key: _formKey,
@@ -174,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text("Forgot Password", style: TextStyle(fontSize: 18,color:Color(0xFFE0435E))),
-                              SecondaryButton(title: 'Click here', onPressed: () {}),
+                              SecondaryButton(title: 'Click here', onPressed:_resetPassword,),
                             ],
                           ),
                           SecondaryButton(
