@@ -186,14 +186,14 @@ import 'package:geocoding/geocoding.dart';
 const String tomtomApiKey =
     "FCEkDNPLpD00ZQ4tFGlltWswGcJselVf"; // Replace with your API Key
 
-class DangerMapPage extends StatefulWidget {
-  const DangerMapPage({super.key});
+class DangerMapPage1 extends StatefulWidget {
+  const DangerMapPage1({super.key});
 
   @override
-  _DangerMapPageState createState() => _DangerMapPageState();
+  _DangerMapPage1State createState() => _DangerMapPage1State();
 }
 
-class _DangerMapPageState extends State<DangerMapPage> {
+class _DangerMapPage1State extends State<DangerMapPage1> {
   final MapController _mapController = MapController();
   LatLng? _currentLocation;
   double _currentZoom = 12.0;
@@ -306,7 +306,18 @@ class _DangerMapPageState extends State<DangerMapPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-   
+     appBar: AppBar(
+        backgroundColor: Color(0xFF43061E),
+        title: Text(
+          'Danger Zone Maps',
+          style: TextStyle(
+            color: Color(0xFFECE1EE),
+            fontSize: 20,
+            fontWeight: FontWeight.w100,
+          ),
+        ),
+      ),
+      drawer: MyDrawer(),
       body: Stack(
         children: [
           FlutterMap(

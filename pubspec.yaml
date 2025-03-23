@@ -59,7 +59,7 @@ flutter:
     - assets/
     - assets/animations/
     - assets/logo.png
-    - assets/login_page_background (2).jpg
+    - assets/login_page_background.jpg
     - assets/animations/location.json
     - assets/animations/oportunity.json
   

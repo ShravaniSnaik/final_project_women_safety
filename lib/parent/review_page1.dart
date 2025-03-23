@@ -6,14 +6,14 @@ import 'package:flutter_application_2/parent/my_drawer.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class ReviewPage extends StatefulWidget {
-  const ReviewPage({super.key});
+class ReviewPage1 extends StatefulWidget {
+  const ReviewPage1({super.key});
 
   @override
-  State<ReviewPage> createState() => _ReviewPageState();
+  State<ReviewPage1> createState() => _ReviewPage1State();
 }
 
-class _ReviewPageState extends State<ReviewPage> {
+class _ReviewPage1State extends State<ReviewPage1> {
   final TextEditingController locationC = TextEditingController();
   final TextEditingController viewsC = TextEditingController();
   bool isSaving = false;
@@ -180,7 +180,18 @@ class _ReviewPageState extends State<ReviewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFECE1EE),
-      
+      appBar: AppBar(
+        backgroundColor: Color(0xFF43061E),
+        title: Text(
+          'Your Views Are Important For Us ',
+          style: TextStyle(
+            color: Color(0xFFECE1EE),
+            fontSize: 20,
+            fontWeight: FontWeight.w100,
+          ),
+        ),
+      ),
+      drawer: MyDrawer(),
       body:
           isSaving
               ? Center(child: CircularProgressIndicator())

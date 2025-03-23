@@ -13,14 +13,14 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+class ProfilePage1 extends StatefulWidget {
+  const ProfilePage1({super.key});
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  State<ProfilePage1> createState() => _ProfilePage1State();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProfilePage1State extends State<ProfilePage1> {
   TextEditingController nameC = TextEditingController();
   TextEditingController child_emailC = TextEditingController();
   TextEditingController parent_emailC = TextEditingController();
@@ -57,7 +57,18 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFECE1EE),
-   
+     appBar: AppBar(
+        backgroundColor: Color(0xFF43061E),
+        title: Text(
+          'Know Yourself',
+          style: TextStyle(
+            color: Color(0xFFECE1EE),
+            fontSize: 20,
+            fontWeight: FontWeight.w100,
+          ),
+        ),
+      ),
+      drawer: MyDrawer(),
       body:
           isSaving == true
               ? Center(
