@@ -131,10 +131,14 @@ dependencies:
   vibration: ^3.1.3
   flutter_launcher_icons: ^0.14.3
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  mockito: ^5.4.4  # For mocking Firebase services
+  build_runner: ^2.4.6
+  firebase_auth_mocks: ^0.14.1
 
 flutter:
 

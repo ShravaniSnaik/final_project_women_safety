@@ -22,7 +22,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
       appBar: AppBar(
         backgroundColor: const Color(0xFF43061E),
         title: const Text(
-          'Select Guardian',
+          'Select Child',
           style: TextStyle(
             color: Color(0xFFECE1EE),
             fontSize: 20,
@@ -63,7 +63,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
 
   Widget _buildDrawerItem(IconData icon, String title, VoidCallback onTap) {
     return ListTile(
-      leading: Icon(icon),
+      leading: Icon(icon,color: Colors.white,),
       title: Text(title),
       onTap: () {
         Navigator.pop(context);

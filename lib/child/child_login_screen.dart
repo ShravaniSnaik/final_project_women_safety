@@ -5,6 +5,7 @@ import 'package:flutter_application_2/child/bottom_page.dart';
 import 'package:flutter_application_2/child/register_child.dart';
 import 'package:flutter_application_2/db/sp.dart';
 import 'package:flutter_application_2/parent/parent_home_screen.dart';
+import 'package:flutter_application_2/services/auth_service.dart';
 import '../components/custom_textfield.dart';
 import '../components/PrimaryButton.dart';
 import '../../utils/constants.dart';
@@ -19,6 +20,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final AuthService _authService = AuthService();
   bool isPasswordShown = true;
   final _formKey = GlobalKey<FormState>();
   final Map<String, String> _formData = {};
@@ -60,40 +62,43 @@ Future<void> _resetPassword() async {
     ),
   );
 }
-  Future<void> _onSubmit() async {
+Future<void> _onSubmit() async {
     if (!_formKey.currentState!.validate()) return;
     _formKey.currentState!.save();
 
-    setState(() {
-      isLoading = true;
-    });
+    setState(() => isLoading = true);
 
     try {
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _formData['email']!,
-        password: _formData['password']!,
+      User? user = await _authService.signIn(
+        _formData['email']!,
+        _formData['password']!,
       );
 
-      if (userCredential.user != null) {
-        DocumentSnapshot userDoc = await FirebaseFirestore.instance
-            .collection('users')
-            .doc(userCredential.user!.uid)
-            .get();
-
-        if (!userDoc.exists) {
-          dialogueBox(context, "User data not found.");
-          setState(() {
-            isLoading = false;
-          });
-          return;
-        }
-
-        String userType = userDoc['type'];
-        await MySharedPreference.saveUserType(userType);
-
-        Widget nextScreen = (userType == 'parent') ? ParentHomeScreen() : BottomPage();
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => nextScreen));
+      if (user == null) {
+        dialogueBox(context, "Login failed. Please try again.");
+        return;
       }
+
+      DocumentSnapshot userDoc =
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(user.uid)
+              .get();
+
+      if (!userDoc.exists) {
+        dialogueBox(context, "User data not found.");
+        return;
+      }
+
+      String userType = userDoc['type'];
+      await MySharedPreference.saveUserType(userType);
+
+      Widget nextScreen =
+          (userType == 'parent') ? ParentHomeScreen() : BottomPage();
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => nextScreen),
+      );
     } on FirebaseAuthException catch (e) {
       String errorMessage = "An error occurred.";
       if (e.code == 'user-not-found') {
@@ -103,9 +108,7 @@ Future<void> _resetPassword() async {
       }
       dialogueBox(context, errorMessage);
     } finally {
-      setState(() {
-        isLoading = false;
-      });
+      setState(() => isLoading = false); // ✅ Reduced redundant setState calls
     }
   }
 
