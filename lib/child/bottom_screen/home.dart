@@ -94,10 +94,12 @@ class _HomePageState extends State<HomePage> {
     String messageBody =
         "https://www.google.com/maps/search/?api=1&query=${_curentPosition!.latitude}%2C${_curentPosition!.longitude}. $_curentAddress";
     if (await _isPermissionGranted()) {
-      for (var element in contactList) {
-        _sendSms(element.number, "I am in trouble: $messageBody");
-      }
-    } else {
+       Future.forEach(contactList, (TContact contact) async {
+      await _sendSms(contact.number, "I am in trouble: $messageBody");
+    });
+
+    Fluttertoast.showToast(msg: "Messages sent to all contacts!");
+  } else {
       Fluttertoast.showToast(msg: "Something went wrong");
     }
   }

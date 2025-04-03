@@ -193,7 +193,7 @@ class _ReviewPageState extends State<ReviewPage> {
                         style: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFF0C0000),
+                          color: Color(0xFF43061E),
                         ),
                       ),
                     ),
@@ -240,7 +240,7 @@ class _ReviewPageState extends State<ReviewPage> {
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 18,
-                                                  color: Color(0xFF0C0000),
+                                                  color: Color(0xFF43061E),
                                                 ),
                                               ),
                                               TextSpan(
@@ -248,7 +248,7 @@ class _ReviewPageState extends State<ReviewPage> {
                                                     data['location'], // Normal text
                                                 style: TextStyle(
                                                   fontSize: 18,
-                                                  color: Color(0xFF0C0000),
+                                                  color: Color(0xFF43061E),
                                                 ),
                                               ),
                                             ],
@@ -264,7 +264,7 @@ class _ReviewPageState extends State<ReviewPage> {
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 16,
-                                                  color: Color(0xFF0C0000),
+                                                  color: Color(0xFF43061E),
                                                 ),
                                               ),
                                               TextSpan(
@@ -272,7 +272,7 @@ class _ReviewPageState extends State<ReviewPage> {
                                                     data['views'], // Normal text
                                                 style: TextStyle(
                                                   fontSize: 16,
-                                                  color: Color(0xFF0C0000),
+                                                  color: Color(0xFF43061E),
                                                 ),
                                               ),
                                             ],
@@ -296,7 +296,7 @@ class _ReviewPageState extends State<ReviewPage> {
                                           itemBuilder:
                                               (context, _) => const Icon(
                                                 Icons.star,
-                                                color: Color(0xFF43061E),
+                                                color: Color(0xFF9F80A7),
                                               ),
                                           onRatingUpdate: (rating) {},
                                         ),

@@ -116,7 +116,7 @@ class _RegisterChildScreenState extends State<RegisterChildScreen> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 40,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w800,
                           color: Color(0xFFECE1EE) 
                         ),
                       ),

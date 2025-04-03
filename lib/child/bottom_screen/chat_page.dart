@@ -64,7 +64,7 @@ class ChatPage extends StatelessWidget {
           style: TextStyle(
             color: Color(0xFFECE1EE),
             fontSize: 20,
-            fontWeight: FontWeight.w100,
+            fontWeight: FontWeight.w700,
           ),
         ),
       ),
@@ -124,8 +124,8 @@ class ChatPage extends StatelessWidget {
                           child: Text(
                             d['name'],
                             style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w100,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
                               color: Color(0xFFECE1EE),
                             ),
                           ),

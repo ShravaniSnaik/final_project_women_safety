@@ -116,7 +116,7 @@ Future<void> _resetPassword() async {
         children: [
           Positioned.fill(
             child: Image.asset(
-              'assets/login_page_background (2).jpg',  // ✅ Changed filename (removed spaces)
+              'assets/login_page_background.jpg',  // ✅ Changed filename (removed spaces)
               fit: BoxFit.cover,
             ),
           ),

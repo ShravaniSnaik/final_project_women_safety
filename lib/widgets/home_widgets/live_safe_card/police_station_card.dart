@@ -40,9 +40,9 @@ class PoliceStationCard extends StatelessWidget {
             Text(
               'Police Stations',
               style: TextStyle(
-                fontSize: 14,
+                fontSize: 15,
                 color: Color(0xFF43061E),
-                fontWeight: FontWeight.w100,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ],

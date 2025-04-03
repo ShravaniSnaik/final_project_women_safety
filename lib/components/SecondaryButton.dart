@@ -18,7 +18,7 @@ class SecondaryButton extends StatelessWidget {
         },
         child: Text(
           title,
-          style: TextStyle(fontSize: 18, color: Color(0xFFECE1EE)),
+          style: TextStyle(fontSize: 18, color: Color(0xFFECE1EE),fontWeight:FontWeight.w700),
         ),
       ),
     );
