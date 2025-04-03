@@ -343,13 +343,17 @@ class _ContactPageState extends State<ContactPage> {
                                     contact.thumbnail != null &&
                                             contact.thumbnail!.isNotEmpty
                                         ? CircleAvatar(
-                                          backgroundColor: primaryColor,
+                                          backgroundColor: Color(
+                                                0xFF9F80A7,
+                                              ),
                                           backgroundImage: MemoryImage(
                                             contact.thumbnail!,
                                           ),
                                         )
                                         : CircleAvatar(
-                                          backgroundColor: primaryColor,
+                                          backgroundColor: Color(
+                                                0xFF9F80A7,
+                                              ),
                                           child: Text(
                                             _getInitials(contact.displayName),
                                           ),

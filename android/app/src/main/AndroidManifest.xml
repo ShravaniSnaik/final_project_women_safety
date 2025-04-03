@@ -1,15 +1,44 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.flutter_application_2">
 
+    <uses-feature android:name="android.hardware.location.gps"/>
     <!-- Permissions for accessing contacts -->
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
     <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
 
+    <!-- Permissions for accessing location -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <!-- Permissions for sending and receiving SMS -->
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SMS"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE"/>
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+
     <application
-        android:label="flutter_application_2"
+        android:label="Women_Safety_App"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
-        
+
+        <service
+    android:name="id.flutter.flutter_background_service.BackgroundService"
+    android:permission="android.permission.FOREGROUND_SERVICE"
+    android:foregroundServiceType="location">
+</service>
+
+       
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -19,7 +48,7 @@
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustResize">
-            
+
             <!-- Specifies an Android theme to apply to this Activity -->
             <meta-data
               android:name="io.flutter.embedding.android.NormalTheme"
@@ -36,14 +65,25 @@
             android:name="flutterEmbedding"
             android:value="2"/>
 
+        
+
     </application>
 
     <!-- Required to query activities that can process text -->
     <queries>
+        <package android:name="com.google.android.apps.messaging"/>
         <intent>
             <action android:name="android.intent.action.PROCESS_TEXT"/>
             <data android:mimeType="text/plain"/>
         </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https"/>
+        </intent>
+        <intent>
+        <action android:name="android.intent.action.SENDTO" />
+        <data android:scheme="sms" />
+    </intent>
     </queries>
 
 </manifest>

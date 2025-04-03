@@ -23,6 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _navigateToNextScreen() async {
+     await MySharedPreference.init();
     await Future.delayed(const Duration(seconds: 3)); // Splash delay
 
     String? userType = await MySharedPreference.getUserType();

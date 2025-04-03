@@ -9,7 +9,7 @@ import 'package:flutter_application_2/components/PrimaryButton1.dart';
 import 'package:flutter_application_2/components/custom_textfield.dart';
 import 'package:flutter_application_2/parent/my_drawer.dart';
 
-import 'package:fluttertoast/fluttertoast.dart';
+//import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
@@ -225,11 +225,11 @@ class _ProfilePage1State extends State<ProfilePage1> {
                                 SystemChannels.textInput.invokeMethod(
                                   'TextInput.hide',
                                 );
-                                profilePic == null
-                                    ? Fluttertoast.showToast(
-                                      msg: 'please select profile picture',
-                                    )
-                                    : update();
+                                // profilePic == null
+                                //     ? Fluttertoast.showToast(
+                                //       msg: 'please select profile picture',
+                                //     )
+                                //     : update();
                               }
                               await FirebaseFirestore.instance
                                   .collection('user')
@@ -242,9 +242,9 @@ class _ProfilePage1State extends State<ProfilePage1> {
                                   })
                                   .then(
                                     (value) => {
-                                      Fluttertoast.showToast(
-                                        msg: 'name updated successfully',
-                                      ),
+                                      // Fluttertoast.showToast(
+                                      //   msg: 'name updated successfully',
+                                     // ),
                                     },
                                   );
                             },
@@ -279,7 +279,7 @@ class _ProfilePage1State extends State<ProfilePage1> {
       });
       return downloadUrl;
     } catch (e) {
-      Fluttertoast.showToast(msg: e.toString());
+     // Fluttertoast.showToast(msg: e.toString());
     }
     return null;
   }

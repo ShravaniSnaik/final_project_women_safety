@@ -7,6 +7,8 @@ import 'package:flutter_application_2/child/child_login_screen.dart';
 import 'package:flutter_application_2/utils/constants.dart';
 
 class MyDrawer extends StatelessWidget {
+  const MyDrawer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Drawer(

@@ -4,7 +4,7 @@ import 'package:flutter_application_2/components/PrimaryButton.dart';
 import 'package:flutter_application_2/components/custom_textfield.dart';
 import 'package:flutter_application_2/parent/my_drawer.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+//import 'package:fluttertoast/fluttertoast.dart';
 
 class ReviewPage1 extends StatefulWidget {
   const ReviewPage1({super.key});
@@ -120,7 +120,7 @@ class _ReviewPage1State extends State<ReviewPage1> {
   // }
   Future<void> saveReview() async {
     if (locationC.text.isEmpty || viewsC.text.isEmpty) {
-      Fluttertoast.showToast(msg: 'Please enter all fields');
+    //  Fluttertoast.showToast(msg: 'Please enter all fields');
       return;
     }
 
@@ -173,7 +173,7 @@ class _ReviewPage1State extends State<ReviewPage1> {
       ratings = 1.0;
     });
 
-    Fluttertoast.showToast(msg: 'Review uploaded successfully');
+    //Fluttertoast.showToast(msg: 'Review uploaded successfully');
   }
 
   @override
