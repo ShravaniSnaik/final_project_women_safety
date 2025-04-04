@@ -599,6 +599,8 @@ import 'package:geolocator/geolocator.dart';
 const String tomtomApiKey = "FCEkDNPLpD00ZQ4tFGlltWswGcJselVf";
 
 class DangerMapPage extends StatefulWidget {
+  const DangerMapPage({super.key});
+
   @override
   _DangerMapPageState createState() => _DangerMapPageState();
 }
