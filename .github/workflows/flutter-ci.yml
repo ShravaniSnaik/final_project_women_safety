@@ -17,7 +17,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.29.0'  # Ensure this matches your project
+          flutter-version: '3.29.2'  # Ensure this matches your project
           cache: true
 
       - name: Setup Dart
