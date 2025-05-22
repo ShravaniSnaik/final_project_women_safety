@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/ai_chatbot/bot_screen.dart';
 import 'package:flutter_application_2/child/bottom_screen/add_contacts.dart';
 import 'package:flutter_application_2/child/bottom_screen/chat_page.dart';
 import 'package:flutter_application_2/child/bottom_screen/home.dart';
@@ -19,6 +20,7 @@ class _BottomPageState extends State<BottomPage> {
   int currentIndex = 0;
   List<Widget> pages = [
     HomePage(),
+    AutoCounselorChatScreen(),
    AddContactsPage(),
     ChatPage(),
     DangerMapPage(),
@@ -42,6 +44,7 @@ class _BottomPageState extends State<BottomPage> {
         onTap: onTapped,
         items: [
           BottomNavigationBarItem(label: 'home', icon: Icon(Icons.home)),
+          BottomNavigationBarItem(label: 'Counselor', icon: Icon(Icons.support_agent)),
           BottomNavigationBarItem(
             label: 'contacts',
             icon: Icon(Icons.contacts),

@@ -41,10 +41,12 @@
 // }
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/db/db_services.dart';
 import 'package:flutter_application_2/db/sp.dart';
 import 'package:flutter_application_2/splash.dart';
 import 'package:flutter_application_2/utils/flutter_background_services.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:telephony/telephony.dart';
 import 'firebase_options.dart'; // ✅ Ensure this file exists
 
 final navigatorKey = GlobalKey<NavigatorState>();

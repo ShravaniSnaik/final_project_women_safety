@@ -139,8 +139,7 @@ dev_dependencies:
   mockito: ^5.4.4  # For mocking Firebase services
   build_runner: ^2.4.6
   firebase_auth_mocks: ^0.14.1
-  # cloud_firestore_mocks: ^0.2.8
-  # firebase_core_platform_interface: ^5.4.0
+
 
 flutter:
 
