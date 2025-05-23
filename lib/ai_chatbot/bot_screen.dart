@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/db/db_services.dart';
+import 'package:flutter_application_2/model/contactsm.dart';
+import 'package:flutter_application_2/services/ai_services.dart';
+import 'package:flutter_application_2/utils/flutter_background_services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:telephony/telephony.dart';
 
 class AutoCounselorChatScreen extends StatefulWidget {
   const AutoCounselorChatScreen({super.key});
@@ -13,34 +20,85 @@ class _AutoCounselorChatScreenState extends State<AutoCounselorChatScreen> {
   List<Map<String, String>> messages = [];
   bool isLoading = false;
 
-  void _sendMessage() {
-    final input = _controller.text.trim();
-    if (input.isEmpty) return;
+  Future<void> sendMessageAuto(String messageBody) async {
+  final Telephony telephony = Telephony.instance;
 
-    setState(() {
-      messages.add({'role': 'user', 'text': input});
-      _controller.clear();
-      isLoading = true;
-    });
 
-    // Simulate a delay and response from AI (replace with API call)
-    Future.delayed(Duration(seconds: 2), () {
-      setState(() {
-        messages.add({
-          'role': 'counselor',
-          'text': "Thank you for sharing. I'm here to support you. Can you tell me more?"
-        });
-        isLoading = false;
-      });
 
-      // Scroll to bottom
-      _scrollController.animateTo(
-        _scrollController.position.maxScrollExtent + 100,
-        duration: Duration(milliseconds: 300),
-        curve: Curves.easeOut,
-      );
-    });
+  // Get saved contacts
+  List<TContact> contactList = await DatabaseHelper().getContactList();
+
+  if (contactList.isEmpty) {
+    Fluttertoast.showToast(msg: "⚠️ No contacts found. Please add contacts.");
+    return;
   }
+
+  Fluttertoast.showToast(msg: "📨 Sending SMS messages...");
+
+  for (var contact in contactList) {
+    try {
+      await telephony.sendSms(
+        to: contact.number,
+        message: messageBody,
+      );
+      Fluttertoast.showToast(msg: "✅ SMS sent to ${contact.number}");
+    } catch (e) {
+      Fluttertoast.showToast(msg: "❌ Failed to send SMS to ${contact.number}: $e");
+    }
+  }
+}
+
+
+  void _sendMessage() async {
+  final input = _controller.text.trim();
+  if (input.isEmpty) return;
+
+  setState(() {
+    messages.add({'role': 'user', 'text': input});
+    _controller.clear();
+    isLoading = true;
+  });
+
+  final emergencyKeywords = [
+  "sucide",
+  "depressed",
+  "kill myself",
+  "want to die",
+  "can't take it"
+];
+
+bool isEmergency = emergencyKeywords.any(
+  (keyword) => input.toLowerCase().contains(keyword.toLowerCase())
+);
+
+if (isEmergency) {
+    // ✅ Get current location
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    String locationUrl = "https://maps.google.com/?q=${position.latitude},${position.longitude}";
+
+    String messageBody = "🚨 Urgent: The user may be in danger and needs support.\n"
+        "Location: $locationUrl\n"
+        "Message: \"$input\"\n"
+        "Please check in on them immediately.";
+
+    await sendMessageAuto(messageBody);
+  }
+  
+  // 🔗 Call your API function
+  String reply = await getCounselorReply(input);
+
+  setState(() {
+    messages.add({'role': 'counselor', 'text': reply});
+    isLoading = false;
+  });
+
+  _scrollController.animateTo(
+    _scrollController.position.maxScrollExtent + 100,
+    duration: Duration(milliseconds: 300),
+    curve: Curves.easeOut,
+  );
+}
+
 
   Widget _buildMessage(Map<String, String> message) {
     bool isUser = message['role'] == 'user';
@@ -49,24 +107,25 @@ class _AutoCounselorChatScreenState extends State<AutoCounselorChatScreen> {
       padding: EdgeInsets.symmetric(vertical: 4, horizontal: 12),
       child: Container(
         decoration: BoxDecoration(
-          color: isUser ? Colors.blueAccent : Colors.grey.shade300,
+          color: isUser ? Color(0xFF9F80A7) : Color(0xFFE0435E),
           borderRadius: BorderRadius.circular(16),
         ),
         padding: EdgeInsets.all(12),
         child: Text(
           message['text'] ?? '',
-          style: TextStyle(color: isUser ? Colors.white : Colors.black87),
+          style: TextStyle(color: isUser ? Color(0xFFECE1EE) : Color(0xFFECE1EE),fontWeight: FontWeight.w500),
         ),
       ),
     );
   }
 
-  @override
+@override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Auto-Counselor"),
-        backgroundColor: Colors.deepPurple,
+        titleTextStyle: TextStyle(color: Color(0xFFECE1EE),fontWeight: FontWeight.w700,fontSize: 23),
+        backgroundColor: Color(0xFF43061E),
       ),
       body: Column(
         children: [
@@ -91,7 +150,7 @@ class _AutoCounselorChatScreenState extends State<AutoCounselorChatScreen> {
           Divider(height: 1),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-            color: Colors.white,
+            color: Color(0xFFECE1EE),
             child: Row(
               children: [
                 Expanded(
@@ -104,7 +163,7 @@ class _AutoCounselorChatScreenState extends State<AutoCounselorChatScreen> {
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.send, color: Colors.deepPurple),
+                  icon: Icon(Icons.send, color: Color(0xFF43061E)),
                   onPressed: _sendMessage,
                 )
               ],
