@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/ai_chatbot/bot_screen.dart';
 import 'package:flutter_application_2/widgets/home_widgets/CustomCarouel.dart';
 import 'package:flutter_application_2/widgets/home_widgets/custom_appBar.dart';
 import 'package:flutter_application_2/widgets/home_widgets/emergency.dart';
@@ -154,7 +155,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFECE1EE),
-      body: SafeArea(
+      body: Stack(
+      children:[
+      SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -258,7 +261,6 @@ class _HomePageState extends State<HomePage> {
 
 
 
-
                       ),
                     ),
                   ],
@@ -268,6 +270,65 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+      DraggableFloatingActionButton(),
+
+    ]));
+  }
+}
+
+class DraggableFloatingActionButton extends StatefulWidget {
+  const DraggableFloatingActionButton({super.key});
+
+  @override
+  _DraggableFloatingActionButtonState createState() => _DraggableFloatingActionButtonState();
+}
+
+class _DraggableFloatingActionButtonState extends State<DraggableFloatingActionButton> {
+  double posX = 250;
+  double posY = 600;
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      left: posX,
+      top: posY,
+      child: Draggable(
+        feedback: _buildButton(),
+        childWhenDragging: Container(),
+        onDraggableCanceled: (velocity, offset) {
+          setState(() {
+            posX = offset.dx;
+            posY = offset.dy;
+          });
+        },
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AutoCounselorChatScreen()),
+            );
+          },
+          child: _buildButton(),
+        ),
+      ),
     );
   }
+
+ Widget _buildButton() {
+  return Container(
+    width: 120, // Increase width
+    height: 120, // Increase height
+    decoration: BoxDecoration(
+      shape: BoxShape.circle,
+      color: Colors.transparent,
+    ),
+    child: ClipOval(
+      child: Lottie.asset(
+        'assets/animations/ai-bot.json',
+        fit: BoxFit.cover,
+      ),
+    ),
+  );
+}
+
 }

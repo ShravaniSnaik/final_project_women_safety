@@ -20,7 +20,7 @@ class _BottomPageState extends State<BottomPage> {
   int currentIndex = 0;
   List<Widget> pages = [
     HomePage(),
-    AutoCounselorChatScreen(),
+    
    AddContactsPage(),
     ChatPage(),
     DangerMapPage(),
@@ -44,7 +44,6 @@ class _BottomPageState extends State<BottomPage> {
         onTap: onTapped,
         items: [
           BottomNavigationBarItem(label: 'home', icon: Icon(Icons.home)),
-          BottomNavigationBarItem(label: 'Counselor', icon: Icon(Icons.support_agent)),
           BottomNavigationBarItem(
             label: 'contacts',
             icon: Icon(Icons.contacts),

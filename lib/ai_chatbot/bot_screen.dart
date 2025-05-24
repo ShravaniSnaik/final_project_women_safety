@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_2/db/db_services.dart';
 import 'package:flutter_application_2/model/contactsm.dart';
 import 'package:flutter_application_2/services/ai_services.dart';
-import 'package:flutter_application_2/utils/flutter_background_services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:telephony/telephony.dart';
