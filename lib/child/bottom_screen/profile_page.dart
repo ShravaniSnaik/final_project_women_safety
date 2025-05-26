@@ -89,7 +89,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   height: 200,
                                   width: double.infinity,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
+                                    //borderRadius: BorderRadius.circular(15),
                                     image: DecorationImage(
                                       image: AssetImage('assets/profile_background.jpg'),
                                       fit: BoxFit.cover,
@@ -173,25 +173,31 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                             SizedBox(height: 20),
-                          PrimaryButton1(
-                            title: "UPDATE",
-                            onPressed: () async {
-                              if (key.currentState!.validate()) {
-                                SystemChannels.textInput.invokeMethod('TextInput.hide');
-                                await updateProfile();
-                              }
-                            },
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: PrimaryButton1(
+                              title: "UPDATE",
+                              onPressed: () async {
+                                if (key.currentState!.validate()) {
+                                  SystemChannels.textInput.invokeMethod('TextInput.hide');
+                                  await updateProfile();
+                                }
+                              },
+                            ),
                           ),
                           SizedBox(height: 20),
-                          PrimaryButton1(
-                            title: "SIGN OUT",
-                            onPressed: () async {
-                              await FirebaseAuth.instance.signOut();
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(builder: (context) => LoginScreen()),
-                              );
-                            },
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: PrimaryButton1(
+                              title: "SIGN OUT",
+                              onPressed: () async {
+                                await FirebaseAuth.instance.signOut();
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                                );
+                              },
+                            ),
                           ),
                         ],
                       ),

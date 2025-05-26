@@ -83,9 +83,10 @@ class PoliceEmergency extends StatelessWidget {
                         Container(
                           height: 20,
                           width: 80,
+
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: Center(
                             child: Text(

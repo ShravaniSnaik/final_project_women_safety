@@ -12,12 +12,14 @@ class CustomAppbar extends StatelessWidget {
     return GestureDetector(
       onTap: () => onTap?.call(),
       child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
         child: Text(
           womenEmpowermentQuotes[quoteIndex ?? 0],
           style: const TextStyle(
-            fontSize: 22,
+            fontSize: 18,
             color: Color(0xFF43061E),
-            fontWeight: FontWeight.w100,
+            fontWeight: FontWeight.w300,
+            fontStyle: FontStyle.italic,
           ),
         ),
       ),

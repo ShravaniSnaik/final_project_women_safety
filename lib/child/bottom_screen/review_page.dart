@@ -179,7 +179,7 @@
 //   Widget build(BuildContext context) {
 //     return Scaffold(
 //       backgroundColor: Color(0xFFECE1EE),
-      
+
 //       body:
 //           isSaving
 //               ? Center(child: CircularProgressIndicator())
@@ -377,10 +377,9 @@ class _ReviewPageState extends State<ReviewPage> {
                   itemCount: 5,
                   unratedColor: Color(0xFFECE1EE),
                   itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                  itemBuilder: (context, _) => const Icon(
-                    Icons.star,
-                    color: Color(0xFF43061E),
-                  ),
+                  itemBuilder:
+                      (context, _) =>
+                          const Icon(Icons.star, color: Color(0xFF43061E)),
                   onRatingUpdate: (rating) {
                     setState(() {
                       ratings = rating;
@@ -421,7 +420,9 @@ class _ReviewPageState extends State<ReviewPage> {
 
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     String locationKey = locationC.text.trim().toLowerCase();
-    DocumentReference locationRef = firestore.collection('locations').doc(locationKey);
+    DocumentReference locationRef = firestore
+        .collection('locations')
+        .doc(locationKey);
 
     await firestore.collection('reviews').add({
       'location': locationKey,
@@ -457,122 +458,147 @@ class _ReviewPageState extends State<ReviewPage> {
     });
   }
 
+  String capitalize(String s) {
+    if (s.isEmpty) return s;
+    return s[0].toUpperCase() + s.substring(1);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFECE1EE),
-      body: isSaving
-          ? Center(child: CircularProgressIndicator())
-          : SafeArea(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "Recent Reviews",
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF43061E),
+      body:
+          isSaving
+              ? Center(child: CircularProgressIndicator())
+              : SafeArea(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text(
+                        "Recent Reviews",
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF43061E),
+                        ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    child: StreamBuilder(
-                      stream: FirebaseFirestore.instance.collection('reviews').snapshots(),
-                      builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                        if (snapshot.connectionState == ConnectionState.waiting) {
-                          return Center(child: CircularProgressIndicator());
-                        }
-                        if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                          return Center(child: Text("No reviews yet."));
-                        }
+                    Expanded(
+                      child: StreamBuilder(
+                        stream:
+                            FirebaseFirestore.instance
+                                .collection('reviews')
+                                .snapshots(),
+                        builder: (
+                          context,
+                          AsyncSnapshot<QuerySnapshot> snapshot,
+                        ) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Center(child: CircularProgressIndicator());
+                          }
+                          if (!snapshot.hasData ||
+                              snapshot.data!.docs.isEmpty) {
+                            return Center(child: Text("No reviews yet."));
+                          }
 
-                        return ListView.separated(
-                          separatorBuilder: (context, index) => Divider(),
-                          itemCount: snapshot.data!.docs.length,
-                          itemBuilder: (context, index) {
-                            final data = snapshot.data!.docs[index];
-                            return Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Card(
-                                elevation: 4,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text.rich(
-                                        TextSpan(
-                                          children: [
-                                            TextSpan(
-                                              text: "Location: ",
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 18,
-                                                color: Color(0xFF43061E),
+                          return ListView.separated(
+                            separatorBuilder: (context, index) => Divider(),
+                            itemCount: snapshot.data!.docs.length,
+                            itemBuilder: (context, index) {
+                              final data = snapshot.data!.docs[index];
+                              return Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Card(
+                                  elevation: 4,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text.rich(
+                                          TextSpan(
+                                            children: [
+                                              TextSpan(
+                                                text: "Location: ",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18,
+                                                  color: Color(0xFF43061E),
+                                                ),
                                               ),
-                                            ),
-                                            TextSpan(
-                                              text: data['location'],
-                                              style: TextStyle(
-                                                fontSize: 18,
-                                                color: Color(0xFF43061E),
+                                              TextSpan(
+                                                text: capitalize(
+                                                  data['location'],
+                                                ),
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  color: Color(0xFF43061E),
+                                                ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                      SizedBox(height: 5),
-                                      Text.rich(
-                                        TextSpan(
-                                          children: [
-                                            TextSpan(
-                                              text: "Comments: ",
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16,
-                                                color: Color(0xFF43061E),
+                                        SizedBox(height: 5),
+                                        Text.rich(
+                                          TextSpan(
+                                            children: [
+                                              TextSpan(
+                                                text: "Comments: ",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 16,
+                                                  color: Color(0xFF43061E),
+                                                ),
                                               ),
-                                            ),
-                                            TextSpan(
-                                              text: data['views'],
-                                              style: TextStyle(
-                                                fontSize: 16,
-                                                color: Color(0xFF43061E),
+                                              TextSpan(
+                                                text: data['views'],
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: Color(0xFF43061E),
+                                                ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                      SizedBox(height: 10),
-                                      RatingBar.builder(
-                                        initialRating: (data['ratings'] as num?)?.toDouble() ?? 1.0,
-                                        minRating: 1,
-                                        direction: Axis.horizontal,
-                                        itemCount: 5,
-                                        ignoreGestures: true,
-                                        unratedColor: Color(0xFFECE1EE),
-                                        itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                                        itemBuilder: (context, _) => const Icon(
-                                          Icons.star,
-                                          color: Color(0xFF9F80A7),
+                                        SizedBox(height: 10),
+                                        RatingBar.builder(
+                                          initialRating:
+                                              (data['ratings'] as num?)
+                                                  ?.toDouble() ??
+                                              1.0,
+                                          minRating: 1,
+                                          direction: Axis.horizontal,
+                                          itemCount: 5,
+                                          ignoreGestures: true,
+                                          unratedColor: Color(0xFFECE1EE),
+                                          itemPadding:
+                                              const EdgeInsets.symmetric(
+                                                horizontal: 3.0,
+                                              ),
+                                          itemBuilder:
+                                              (context, _) => const Icon(
+                                                Icons.star,
+                                                size: 18,
+                                                color: Color(0xFF9F80A7),
+                                              ),
+                                          onRatingUpdate: (rating) {},
                                         ),
-                                        onRatingUpdate: (rating) {},
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            );
-                          },
-                        );
-                      },
+                              );
+                            },
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xFF43061E),
         onPressed: () {

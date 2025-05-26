@@ -95,12 +95,12 @@ class _HomePageState extends State<HomePage> {
     String messageBody =
         "https://www.google.com/maps/search/?api=1&query=${_curentPosition!.latitude}%2C${_curentPosition!.longitude}. $_curentAddress";
     if (await _isPermissionGranted()) {
-       Future.forEach(contactList, (TContact contact) async {
-      await _sendSms(contact.number, "I am in trouble: $messageBody");
-    });
+      Future.forEach(contactList, (TContact contact) async {
+        await _sendSms(contact.number, "I am in trouble: $messageBody");
+      });
 
-    Fluttertoast.showToast(msg: "Messages sent to all contacts!");
-  } else {
+      Fluttertoast.showToast(msg: "Messages sent to all contacts!");
+    } else {
       Fluttertoast.showToast(msg: "Something went wrong");
     }
   }
@@ -122,14 +122,12 @@ class _HomePageState extends State<HomePage> {
     _getCurrentLocation();
 
     //shake//
-      ShakeDetector detector = ShakeDetector.autoStart(
+    ShakeDetector detector = ShakeDetector.autoStart(
       onPhoneShake: () {
         getAndSendSms();
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Shake!'),
-          ),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('Shake!')));
         // Do stuff on phone shake
       },
       minimumShakeCount: 1,
@@ -140,7 +138,7 @@ class _HomePageState extends State<HomePage> {
 
     // To close: detector.stopListening();
     // ShakeDetector.waitForStart() waits for user to call detector.startListening();
-  
+
     _getPermission();
   }
 
@@ -156,123 +154,145 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Color(0xFFECE1EE),
       body: Stack(
-      children:[
-      SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              CustomAppbar(getRandomQuote, qIndex),
-              Expanded(
-                child: ListView(
-                  shrinkWrap: true,
-                  children: [
-                    CustomCarouel(),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "Emergency",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Color(0xFF43061E),
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                    Emergency(),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "Explore LiveSafe",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Color(0xFF43061E),
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                    LiveSafe(),
-                    SafeHome(),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => OpportunitiesScreen(),
+        children: [
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  CustomAppbar(getRandomQuote, qIndex),
+                  Expanded(
+                    child: ListView(
+                      shrinkWrap: true,
+                      children: [
+                        CustomCarouel(),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "Emergency",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Color(0xFF43061E),
+                              fontWeight: FontWeight.w700,
                             ),
-                          );
-                        },
-                       child: Card(
-  color: Color(0xFF9F80A7),
-  elevation: 5,
-  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-  child: Container(
-    padding: EdgeInsets.all(10), // Increased padding to make the card bigger
-    width: double.infinity, // Make card take full width
-    height: 180,
-   
-    child: Row(
-      children: [
-        Padding(
-          padding: EdgeInsets.only(left: 1), // Space from left edge
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(15), // Rounded edges
-            child: Lottie.asset(
-              'assets/animations/oportunity.json',
-              width: 165, // Keeping animation size same
-              height: 165, // Keeping animation size same
-              fit: BoxFit.cover,
+                          ),
+                        ),
+                        Emergency(),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "Explore LiveSafe",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Color(0xFF43061E),
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                        LiveSafe(),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SafeHome(),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => OpportunitiesScreen(),
+                                ),
+                              );
+                            },
+                            child: Card(
+                              color: Color(0xFF9F80A7),
+                              elevation: 5,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Container(
+                                padding: EdgeInsets.all(
+                                  10,
+                                ), // Increased padding to make the card bigger
+                                width:
+                                    double
+                                        .infinity, // Make card take full width
+                                height: 180,
+
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                        left: 1,
+                                      ), // Space from left edge
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(
+                                          15,
+                                        ), // Rounded edges
+                                        child: Lottie.asset(
+                                          'assets/animations/oportunity.json',
+                                          width:
+                                              165, // Keeping animation size same
+                                          height:
+                                              165, // Keeping animation size same
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 6,
+                                    ), // Increased spacing between animation and text
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment
+                                                .center, // Center text vertically
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment
+                                                .start, // Align text to left
+                                        children: [
+                                          Text(
+                                            "Explore Opportunities",
+                                            style: TextStyle(
+                                              fontSize:
+                                                  16, // Slightly bigger text
+                                              fontWeight: FontWeight.w800,
+                                              color: Color(0xFF43061E),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 8,
+                                          ), // Space between title and subtitle
+                                          Text(
+                                            "Find various opportunities suited for you",
+                                            style: TextStyle(
+                                              fontSize:
+                                                  14, // Slightly bigger text
+                                              fontWeight: FontWeight.w500,
+                                              color: Color(0xFFECE1EE),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-        SizedBox(width: 6), // Increased spacing between animation and text
-        Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center, // Center text vertically
-            crossAxisAlignment: CrossAxisAlignment.start, // Align text to left
-            children: [
-              Text(
-                "Explore Opportunities",
-                style: TextStyle(
-                  fontSize: 16, // Slightly bigger text
-                  fontWeight: FontWeight.w800,
-                  color: Color(0xFF43061E),
-                ),
-              ),
-              SizedBox(height: 8), // Space between title and subtitle
-              Text(
-                "Find various opportunities suited for you",
-                style: TextStyle(
-                  fontSize: 14, // Slightly bigger text
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xFFECE1EE),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    ),
-  ),
-),
-
-
-
-
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
+          DraggableFloatingActionButton(),
+        ],
       ),
-      DraggableFloatingActionButton(),
-
-    ]));
+    );
   }
 }
 
@@ -280,10 +300,12 @@ class DraggableFloatingActionButton extends StatefulWidget {
   const DraggableFloatingActionButton({super.key});
 
   @override
-  _DraggableFloatingActionButtonState createState() => _DraggableFloatingActionButtonState();
+  _DraggableFloatingActionButtonState createState() =>
+      _DraggableFloatingActionButtonState();
 }
 
-class _DraggableFloatingActionButtonState extends State<DraggableFloatingActionButton> {
+class _DraggableFloatingActionButtonState
+    extends State<DraggableFloatingActionButton> {
   double posX = 250;
   double posY = 600;
 
@@ -305,7 +327,9 @@ class _DraggableFloatingActionButtonState extends State<DraggableFloatingActionB
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => AutoCounselorChatScreen()),
+              MaterialPageRoute(
+                builder: (context) => AutoCounselorChatScreen(),
+              ),
             );
           },
           child: _buildButton(),
@@ -314,21 +338,17 @@ class _DraggableFloatingActionButtonState extends State<DraggableFloatingActionB
     );
   }
 
- Widget _buildButton() {
-  return Container(
-    width: 120, // Increase width
-    height: 120, // Increase height
-    decoration: BoxDecoration(
-      shape: BoxShape.circle,
-      color: Colors.transparent,
-    ),
-    child: ClipOval(
-      child: Lottie.asset(
-        'assets/animations/ai-bot.json',
-        fit: BoxFit.cover,
+  Widget _buildButton() {
+    return Container(
+      width: 120, // Increase width
+      height: 120, // Increase height
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: Colors.transparent,
       ),
-    ),
-  );
-}
-
+      child: ClipOval(
+        child: Lottie.asset('assets/animations/ai-bot.json', fit: BoxFit.cover),
+      ),
+    );
+  }
 }

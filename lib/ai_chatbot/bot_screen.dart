@@ -4,6 +4,7 @@ import 'package:flutter_application_2/model/contactsm.dart';
 import 'package:flutter_application_2/services/ai_services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:gpt_markdown/gpt_markdown.dart';
 import 'package:telephony/telephony.dart';
 
 class AutoCounselorChatScreen extends StatefulWidget {
@@ -110,7 +111,7 @@ if (isEmergency) {
           borderRadius: BorderRadius.circular(16),
         ),
         padding: EdgeInsets.all(12),
-        child: Text(
+        child: GptMarkdown(
           message['text'] ?? '',
           style: TextStyle(color: isUser ? Color(0xFFECE1EE) : Color(0xFFECE1EE),fontWeight: FontWeight.w500),
         ),
