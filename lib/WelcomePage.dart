@@ -26,6 +26,11 @@ List<OnboardingItem> onboardintItems = [
     title: "Home Page",
     subtitle: "Inspire. Stay Safe. Explore. Get daily motivation, one-tap emergency help, instant location sharing, and career opportunities—all in one place!",
   ),
+  OnboardingItem(
+    lottieAsset: "assets/animations/welcome_ai_bot.json",
+    title: "Auto-Counselor",
+    subtitle: "A smart AI counselor to support your emotional well-being.Detects distress and alerts your contacts with location instantly.",
+  ),
    OnboardingItem(
     lottieAsset: "assets/animations/contact.json",
     title: "Contact-Page",

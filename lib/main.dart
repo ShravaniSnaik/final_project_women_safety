@@ -45,6 +45,7 @@ import 'package:flutter_application_2/db/sp.dart';
 import 'package:flutter_application_2/splash.dart';
 import 'package:flutter_application_2/utils/flutter_background_services.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:telephony/telephony.dart';
 import 'firebase_options.dart'; // ✅ Ensure this file exists
 
 final navigatorKey = GlobalKey<NavigatorState>();
@@ -62,9 +63,11 @@ void main() async {
   }
 
   await MySharedPreference.init();
+//  final Telephony telephony = Telephony.instance;
 
-  /// 🔹 Step 1: Request permissions BEFORE starting the background service
-  await requestPermissions();
+//   await telephony.requestPhoneAndSmsPermissions;
+//   /// 🔹 Step 1: Request permissions BEFORE starting the background service
+//   await requestPermissions();
 
   /// 🔹 Step 2: Now start the background service
   await initializeService();

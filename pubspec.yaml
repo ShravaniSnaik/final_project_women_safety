@@ -93,6 +93,7 @@ dependencies:
     sdk: flutter
 
   http: ^1.4.0
+  flutter_markdown: ^0.7.7+1
   cupertino_icons: ^1.0.8
   carousel_slider: ^5.0.0
   flutter_sms: ^2.3.3
@@ -109,7 +110,7 @@ dependencies:
   webview_flutter_platform_interface: ^2.10.0
   flutter_phone_direct_caller: ^2.1.1
   url_launcher: ^6.3.1
-  permission_handler: ^11.4.0
+  permission_handler: ^12.0.0+1
   image_picker: ^1.1.2
   uuid: ^4.5.1
   cached_network_image: ^3.4.1

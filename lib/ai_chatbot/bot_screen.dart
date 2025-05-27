@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_2/db/db_services.dart';
 import 'package:flutter_application_2/model/contactsm.dart';
 import 'package:flutter_application_2/services/ai_services.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:telephony/telephony.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 
 class AutoCounselorChatScreen extends StatefulWidget {
   const AutoCounselorChatScreen({super.key});
@@ -99,34 +101,60 @@ if (isEmergency) {
 }
 
 
-  Widget _buildMessage(Map<String, String> message) {
-    bool isUser = message['role'] == 'user';
-    return Container(
-      alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
-      padding: EdgeInsets.symmetric(vertical: 4, horizontal: 12),
-      child: Container(
-        decoration: BoxDecoration(
-          color: isUser ? Color(0xFF9F80A7) : Color(0xFFE0435E),
-          borderRadius: BorderRadius.circular(16),
-        ),
-        padding: EdgeInsets.all(12),
-        child: Text(
-          message['text'] ?? '',
-          style: TextStyle(color: isUser ? Color(0xFFECE1EE) : Color(0xFFECE1EE),fontWeight: FontWeight.w500),
-        ),
+
+Widget _buildMessage(Map<String, String> message) {
+  bool isUser = message['role'] == 'user';
+
+  return Container(
+    alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
+    padding: EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+    child: Container(
+      decoration: BoxDecoration(
+        color: isUser ? Color(0xFF9F80A7) : Color(0xFFE0435E),
+        borderRadius: BorderRadius.circular(16),
       ),
-    );
-  }
+      padding: EdgeInsets.all(12),
+      child: isUser
+          ? Text(
+              message['text'] ?? '',
+              style: TextStyle(
+                color: Color(0xFFECE1EE),
+                fontWeight: FontWeight.w500,
+              ),
+            )
+          : MarkdownBody(
+              data: message['text'] ?? '',
+              styleSheet: MarkdownStyleSheet(
+                p: TextStyle(
+                  color: Color(0xFFECE1EE),
+                  fontWeight: FontWeight.w500,
+                ),
+                strong: TextStyle(color: Color(0xFFECE1EE)),
+                h1: TextStyle(color: Color(0xFFECE1EE), fontSize: 20, fontWeight: FontWeight.bold),
+                h2: TextStyle(color: Color(0xFFECE1EE), fontSize: 18, fontWeight: FontWeight.bold),
+                h3: TextStyle(color: Color(0xFFECE1EE), fontSize: 16, fontWeight: FontWeight.bold),
+                listBullet: TextStyle(color: Color(0xFFECE1EE)),
+              ),
+            ),
+    ),
+  );
+}
 
 @override
   Widget build(BuildContext context) {
     return Scaffold(
+          resizeToAvoidBottomInset: true, // this ensures keyboard doesn't overlap content
       appBar: AppBar(
         title: Text("Auto-Counselor"),
         titleTextStyle: TextStyle(color: Color(0xFFECE1EE),fontWeight: FontWeight.w700,fontSize: 23),
         backgroundColor: Color(0xFF43061E),
+              foregroundColor: Color(0xFFECE1EE), // this changes back arrow & title color
+
       ),
-      body: Column(
+  body: SafeArea(
+  child: LayoutBuilder(
+    builder: (context, constraints) {
+      return Column(
         children: [
           Expanded(
             child: ListView.builder(
@@ -146,30 +174,45 @@ if (isEmergency) {
               },
             ),
           ),
-          Divider(height: 1),
+          Divider(height: 10),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
             color: Color(0xFFECE1EE),
+            padding: EdgeInsets.only(
+              left: 8,
+              right: 8,
+              top: 6,
+              bottom: MediaQuery.of(context).viewInsets.bottom + 8,
+            ),
             child: Row(
               children: [
                 Expanded(
-                  child: TextField(
-                    controller: _controller,
-                    decoration: InputDecoration.collapsed(
-                      hintText: "Type your thoughts...",
-                    ),
-                    onSubmitted: (_) => _sendMessage(),
-                  ),
-                ),
+  child: Padding(
+    padding: EdgeInsets.symmetric(horizontal: 8),
+    child: TextField(
+      controller: _controller,
+      decoration: InputDecoration.collapsed(
+        hintText: "Type your thoughts...",
+      ),
+      onSubmitted: (_) => _sendMessage(),
+    ),
+  ),
+),
+
                 IconButton(
                   icon: Icon(Icons.send, color: Color(0xFF43061E)),
                   onPressed: _sendMessage,
                 )
               ],
             ),
-          )
+          ),
         ],
-      ),
+      );
+    },
+  ),
+),
+
+
+
     );
   }
 }
